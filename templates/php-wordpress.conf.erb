@@ -1,0 +1,15 @@
+# PHP backend configuration snippet for wordpress
+# This file has been provided by puppet for <%= @fqdn %>.
+# DON'T EDIT it manually, any changes will be lost
+#
+
+include fastcgi_params;
+fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+# Zero-day exploit defense.
+# http://forum.nginx.org/read.php?2,88845,page=3
+# This is a robust solution for path info security issue and works with "cgi.fix_pathinfo = 1" in /etc/php.ini (default)
+if (!-f $document_root$fastcgi_script_name) {
+   return 404;
+}
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+fastcgi_pass php;
