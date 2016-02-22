@@ -64,12 +64,12 @@ server {
     <%- end -%>
     allow 127.0.0.1;
     deny all;
-    include php-wordpress.conf
+    include php-wordpress.conf;
   }
   <% end %>
 
   # Pass all .php files onto a php-fpm/php-fcgi server.
   location ~ \.php$ {
-    include php-wordpress.conf
+    include php-wordpress.conf;
   }
 }
